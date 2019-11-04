@@ -27,3 +27,6 @@ up: ## start all services
 
 down: ## stop all services
 	docker-compose down --remove-orphans
+
+lint:
+	$(DOCKER_COMPOSE_RUN_NODE) yarn lint

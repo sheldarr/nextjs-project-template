@@ -1,7 +1,7 @@
 import React from 'react';
 import Head from 'next/head';
 
-const Home = () => (
+const Home = (): JSX.Element => (
   <div>
     <Head>
       <title>Home</title>
