@@ -1,7 +1,7 @@
 const { getGreatOldOnes } = require('../../db');
 
 module.exports = (req, res) => {
-  const mythos = getGreatOldOnes();
+  const greatOldOnes = getGreatOldOnes();
 
-  return res.send(mythos);
+  return res.send(greatOldOnes);
 };
