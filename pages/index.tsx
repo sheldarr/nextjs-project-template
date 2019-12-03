@@ -8,8 +8,6 @@ import styled from 'styled-components';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 
-import NavBar from '../components/NavBar';
-
 const StyledPaper = styled(Paper)`
   margin-bottom: 2rem;
   margin-top: 2rem;
@@ -27,7 +25,6 @@ const Home: NextPage<Props> = ({ greatOldOnes }: Props) => (
       <title>next-js-project-template</title>
       <link href="/favicon.ico" rel="icon" />
     </Head>
-    <NavBar />
     <Container>
       <StyledPaper>
         <Grid container>
