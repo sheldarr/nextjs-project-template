@@ -39,6 +39,7 @@
         "shorthandFirst": true
       }
     ],
+    "react/prop-types": "off",
     "sort-keys": "error",
     "prettier/prettier": "error"
   }
