@@ -16,7 +16,7 @@ import NavBar from '../components/NavBar';
 
 class CustomApp extends App {
   render() {
-    const { Component, pageProps } = this.props;
+    const { Component, pageProps, router } = this.props;
 
     const theme = createMuiTheme({
       palette: {
@@ -29,7 +29,11 @@ class CustomApp extends App {
         <CssBaseline />
         <ThemeProvider theme={theme}>
           <NavBar />
-          <PageTransition classNames="page-transition" timeout={300}>
+          <PageTransition
+            classNames="page-transition"
+            key={router.route}
+            timeout={300}
+          >
             <Component {...pageProps} />
           </PageTransition>
         </ThemeProvider>
