@@ -29,7 +29,6 @@ class CustomApp extends App {
         <CssBaseline />
         <ThemeProvider theme={theme}>
           <NavBar />
-
           <PageTransition classNames="page-transition" timeout={300}>
             <Component {...pageProps} />
           </PageTransition>
