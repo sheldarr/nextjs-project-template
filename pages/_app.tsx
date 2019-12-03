@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React from 'react';
+import App from 'next/app';
 import CssBaseline from '@material-ui/core/CssBaseline';
 
 import { config } from '@fortawesome/fontawesome-svg-core';
@@ -8,13 +9,17 @@ config.autoAddCss = false;
 
 axios.defaults.timeout = 5000;
 
-const CustomApp = ({ Component, pageProps }) => {
-  return (
-    <>
-      <CssBaseline />
-      <Component {...pageProps} />;
-    </>
-  );
-};
+class CustomApp extends App {
+  render() {
+    const { Component, pageProps } = this.props;
+
+    return (
+      <>
+        <CssBaseline />
+        <Component {...pageProps} />;
+      </>
+    );
+  }
+}
 
 export default CustomApp;
