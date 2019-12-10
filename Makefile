@@ -22,6 +22,9 @@ dev: ## start development
 install: ## stop all services
 	$(DOCKER_COMPOSE_RUN_NODE) yarn install
 
+prod: ## start production
+	docker-compose -f docker-compose.yml -f docker-compose.production.yml up
+
 up: ## start all services
 	docker-compose up -d
 
