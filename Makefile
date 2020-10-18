@@ -1,35 +1,34 @@
-.PHONY: help build
+include .env
 
-help:
-	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
+USERID=$(shell id -u)
 
-.DEFAULT_GOAL := help
-USER_ID = `id -u $$USER`
-UUID = `uuidgen`
-
-DOCKER_COMPOSE_RUN_NODE = docker-compose run \
-	--name "$(UUID)" \
-	--user "$(USER_ID)" \
+DOCKER_RUN = docker run \
+	--volume ${PWD}:/app \
+	--workdir /app \
+	--user ${USERID} \
+	--publish ${PORT}:${PORT} \
+	--tty \
+	--interactive \
 	--rm \
-	node 
+	node:14-alpine
 
 build: ## build for production
-	$(DOCKER_COMPOSE_RUN_NODE) yarn build
+	$(DOCKER_RUN) yarn build
 
 dev: ## start development
-	docker-compose run --name nextjs-project-template --rm --service-ports nextjs-project-template
+	$(DOCKER_RUN) yarn dev
 
-install: ## stop all services
-	$(DOCKER_COMPOSE_RUN_NODE) yarn install
+test: ## run tests
+	$(DOCKER_RUN) yarn test
+
+test--watch: ## run tests in watch mode
+	$(DOCKER_RUN) yarn test:watch
+
+install: ## install dependencies
+	$(DOCKER_RUN) yarn install
 
 prod: ## start production
-	docker-compose -f docker-compose.yml -f docker-compose.production.yml up
+	$(DOCKER_RUN) yarn start
 
-up: ## start all services
-	docker-compose up -d
-
-down: ## stop all services
-	docker-compose down --remove-orphans
-
-lint:
-	$(DOCKER_COMPOSE_RUN_NODE) yarn lint
+lint: ## run linter
+	$(DOCKER_RUN) yarn lint

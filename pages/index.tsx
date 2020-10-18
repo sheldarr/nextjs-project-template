@@ -1,12 +1,12 @@
-import axios from 'axios';
 import { NextPage } from 'next';
 import React from 'react';
-import Head from 'next/head';
 import Container from '@material-ui/core/Container';
 import Paper from '@material-ui/core/Paper';
 import styled from 'styled-components';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
+
+import useGreatOldOnes from '../hooks/useGreatOldOnes';
 
 const StyledPaper = styled(Paper)`
   margin-bottom: 2rem;
@@ -15,42 +15,25 @@ const StyledPaper = styled(Paper)`
   padding: 2rem;
 `;
 
-interface Props {
-  greatOldOnes: GreatOldOne[];
-}
+const Home: NextPage = () => {
+  const { data: greatOldOnes } = useGreatOldOnes();
 
-const Home: NextPage<Props> = ({ greatOldOnes }: Props) => (
-  <div>
-    <Head>
-      <title>next-js-project-template</title>
-      <link href="/favicon.ico" rel="icon" />
-    </Head>
+  return (
     <Container>
       <StyledPaper>
         <Grid container>
           <Grid item xs={12}>
             <Typography variant="h4">Great Old Ones</Typography>
-            <ul></ul>
-            {greatOldOnes.map((greatOldOne) => (
-              <li key={greatOldOne}>{greatOldOne}</li>
-            ))}
+            <ul>
+              {greatOldOnes?.map((greatOldOne) => (
+                <li key={greatOldOne}>{greatOldOne}</li>
+              ))}
+            </ul>
           </Grid>
         </Grid>
       </StyledPaper>
     </Container>
-  </div>
-);
-
-type GreatOldOne = string;
-
-Home.getInitialProps = async () => {
-  const { data: greatOldOnes } = await axios.get<GreatOldOne[]>(
-    `${process.env.APP_API_URL}/great-old-ones`,
   );
-
-  return {
-    greatOldOnes,
-  };
 };
 
 export default Home;
