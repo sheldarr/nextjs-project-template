@@ -1,6 +1,4 @@
-# votenger
-
-Voting application for Lan party.
+# nextjs-project-template
 
 ## development
 
