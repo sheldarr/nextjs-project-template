@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import StatusCodes from 'http-status-codes';
+import { StatusCodes } from 'http-status-codes';
 
 const GREAT_OLD_ONES: string[] = [
   'Bokrug',
