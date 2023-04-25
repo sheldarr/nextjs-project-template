@@ -46,7 +46,6 @@
         "ignore": ["global", "jsx"]
       }
     ],
-    "react/prop-types": "off",
-    "sort-keys": "error"
+    "react/prop-types": "off"
   }
 }

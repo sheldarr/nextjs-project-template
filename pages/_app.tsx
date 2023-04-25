@@ -6,6 +6,7 @@ import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
 import { PageTransition } from 'next-page-transitions';
 import Head from 'next/head';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 import 'normalize-css/normalize.css';
 
@@ -21,6 +22,7 @@ const CustomApp: NextPage<AppProps> = ({ Component, pageProps, router }) => {
       primary: { main: '#2fa200' },
     },
   });
+  const queryClient = new QueryClient();
 
   return (
     <>
@@ -29,12 +31,14 @@ const CustomApp: NextPage<AppProps> = ({ Component, pageProps, router }) => {
         <title>nextjs-project-template</title>
         <link href="/favicon.ico" rel="icon" />
       </Head>
-      <ThemeProvider theme={theme}>
-        <NavBar />
-        <PageTransition classNames="page-transition" timeout={300}>
-          <Component {...pageProps} key={router.route} />
-        </PageTransition>
-      </ThemeProvider>
+      <QueryClientProvider client={queryClient}>
+        <ThemeProvider theme={theme}>
+          <NavBar />
+          <PageTransition classNames="page-transition" timeout={300}>
+            <Component {...pageProps} key={router.route} />
+          </PageTransition>
+        </ThemeProvider>
+      </QueryClientProvider>
       <style global jsx>{`
         .page-transition-enter {
           opacity: 0;

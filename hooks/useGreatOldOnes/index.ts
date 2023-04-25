@@ -1,9 +1,16 @@
+import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
-import useSWR from 'swr';
 
-const fetcher = (url: string) =>
-  axios.get<string[]>(url).then(({ data }) => data);
+const getGreatOldOnes = async () => {
+  const { data } = await axios.get<string[]>('/api/greatOldOnes');
 
-const useGreatOldOnes = () => useSWR('/api/greatOldOnes', fetcher);
+  return data;
+};
+
+const useGreatOldOnes = () =>
+  useQuery({
+    queryFn: getGreatOldOnes,
+    queryKey: ['greatOldOnes'],
+  });
 
 export default useGreatOldOnes;
