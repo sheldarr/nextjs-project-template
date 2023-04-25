@@ -1,6 +1,11 @@
-/* eslint-env node */
+// @ts-check
 /* eslint-disable @typescript-eslint/no-var-requires */
 
 const withOffline = require('next-offline');
 
-module.exports = withOffline({});
+/**
+ * @type {import('next').NextConfig}
+ **/
+const nextConfig = withOffline({});
+
+module.exports = nextConfig;
