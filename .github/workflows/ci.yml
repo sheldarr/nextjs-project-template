@@ -13,7 +13,7 @@ jobs:
           node-version: ${{ env.NODE_VERSION }}
           cache: 'yarn'
       - name: Install dependencies
-        run: npm ci
+        run: yarn install --frozen-lockfile
       - name: Check source code formatting
         run: npx prettier --check .
       - name: Lint source code
