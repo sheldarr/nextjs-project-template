@@ -17,10 +17,13 @@ jobs:
         run: yarn install --frozen-lockfile
       - name: Build dist
         run: yarn build
+      - name: Install production dependencies
+        run: yarn install --frozen-lockfile --production
       - name: Install ssh key
         uses: shimataro/ssh-key-action@v2
         with:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           known_hosts: ${{ secrets.KNOWN_HOSTS }}
       - name: Deploy
-        run: ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "touch nextjs-project-template"
+        run: |
+          rsync -avz . ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:./nextjs-project-template/
