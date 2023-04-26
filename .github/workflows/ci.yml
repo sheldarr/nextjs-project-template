@@ -15,8 +15,8 @@ jobs:
       - name: Install dependencies
         run: yarn install --frozen-lockfile
       - name: Check source code formatting
-        run: npx prettier --check .
+        run: yarn prettier --check .
       - name: Lint source code
-        run: npx eslint --max-warnings=0 .
+        run: yarn eslint --max-warnings=0 .
       - name: Run jest
-        run: npm run test
+        run: yarn test
